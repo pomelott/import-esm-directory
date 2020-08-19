@@ -1,0 +1,20 @@
+{
+  "name": "import-esm-directory",
+  "description": "require es-module directory when use ts in node environment",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "repository": "https://github.com/pomelott/import-esm-directory",
+  "author": "pomelott <pomelott@163.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^14.6.0"
+  },
+  "keywords": [
+    "ts",
+    "typescript",
+    "esm",
+    "es-module",
+    "ts-node",
+    "import"
+  ]
+}
