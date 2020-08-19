@@ -24,7 +24,11 @@ function initFilePath (baseDir: string, esModule: any) {
                     new Promise((resolve) => {
                         // esmodule with import function must return a promise object
                         import(targetPath).then((module) => {
-                            esModule[filenamePrefix] = module;
+                            if (module.default) {
+                                esModule[filenamePrefix] = module.default;
+                            } else {
+                                esModule[filenamePrefix] = module;
+                            }
                             resolve(true);
                         })
                     })
