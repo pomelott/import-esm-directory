@@ -1,5 +1,10 @@
-import path from 'path';
-import fs from 'fs';
+const path = require('path');
+const fs = require('fs');
+
+type DirectoryEsModule = {
+    [key: string]: {} | DirectoryEsModule
+}
+
 function getFilePrefix (filename: string): string {
     let matchRes = filename.match(/.*(?=\.[^\.]+)/);
     if (matchRes && matchRes.length) {
