@@ -1,8 +1,8 @@
 # import-esm-directory
 
-* require es-module directory when use ts in node environment
-* notice: use with ts in node env !! (ts module can use es-module directly.)
-* if useful, could you please give me a start on github.
+* import es-module directory when use ts in node environment
+* notice: only use with ts in node env !! (ts module can use es-module directly.)
+* if useful, could you please give me a ⭐️star⭐ on github.
 
 ## fast use
 
@@ -40,3 +40,7 @@ routerDirectoryPromise.then((esmDirectory) => {
     console.log(esmDirectory.message.news.today.newsToday);
 })
 ```
+
+## description
+
+* because that this use dynamic import of es6, so the package returns a promise object

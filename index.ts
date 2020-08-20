@@ -7,7 +7,8 @@ function getFilePrefix (filename: string): string {
     }
     return '';
 }
-function initFilePath (baseDir: string, esModule: any) {
+
+function initFilePath (baseDir: string, esModule: DirectoryEsModule) {
     let dir: string[] = fs.readdirSync(baseDir);
     let pro:Array<Promise<boolean>> = [];
     dir.forEach(async (item: string) => {
