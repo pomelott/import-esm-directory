@@ -1,3 +1,13 @@
 /// <reference types="node" />
-declare const _default: (module: NodeModule) => Promise<object>;
+declare type DirectoryEsModule = {
+    [key: string]: {} | DirectoryEsModule;
+};
+declare type layerEsModule = {
+    [key: string]: NodeModule;
+};
+declare type EsModule = {
+    deepModule: DirectoryEsModule;
+    layerModule: layerEsModule;
+};
+declare const _default: (module: NodeModule) => Promise<EsModule>;
 export default _default;

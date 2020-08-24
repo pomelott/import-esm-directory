@@ -13,14 +13,19 @@ root
 |——main.ts
 └——router
     |———index.ts
-    │———user.ts
-    └———message
-         |——— news
-         |     |———list.ts
-         |     └———today
-         |          └———newsToday.ts
-         └———show.ts
+    |———list
+    |    |——— listInter
+    |    |      └———newList.ts
+    |    |——— userList.ts
+    |    └——— news.ts
+    |———main
+    |     └——— mainInter
+    |            └——— domain.ts
+    └———user
+         └——— priority.ts
 ```
+
+### use default function
 
 * router/index.ts
 
@@ -35,12 +40,79 @@ export default importEsmDirectory(module);
 import routerDirectoryPromise from './router';
 routerDirectoryPromise.then((esmDirectory) => {
     console.log(esmDirectory);
-    console.log(esmDirectory.user);
-    console.log(esmDirectory.message.news.list);
-    console.log(esmDirectory.message.news.today.newsToday);
 })
+/* output
+{
+	list: {
+		listInter: {
+			newlist: [Object]
+		},
+		news: {},
+		userList: {
+			index: [Object]
+		}
+	},
+	main: {
+		mainInter: {
+			domain: [Object]
+		}
+	},
+	user: {
+		priority: [Function]
+	}
+}
+*/
+```
+
+### use parse function
+
+* router/index.ts
+
+```ts
+import {importParseDirectory} from 'import-esm-directory
+export default importParseDirectory(module);
+```
+
+* import the directory in main.ts
+
+```ts
+import routerDirectoryPromise from './router';
+routerDirectoryPromise.then((esmDirectory) => {
+    console.log(esmDirectory)
+})
+/*  output
+{
+	deepModule: {
+		list: {
+			listInter: [Object],
+			news: {},
+			userList: [Object]
+		},
+		main: {
+			mainInter: [Object]
+		},
+		user: {
+			priority: [Function]
+		}
+	},
+	layerModule: {
+		'list/listInter/newlist': {
+			name: 'newslist'
+		},
+		'list/news': {},
+		'list/userList': {
+			index: [Object]
+		},
+		'main/mainInter/domain': {
+			name: 'domain'
+		},
+		'user/priority': [Function]
+	}
+}
+*/
 ```
 
 ## description
 
+* the separator of path may be different on windows.
 * because that this use dynamic import of es6, so the package returns a promise object

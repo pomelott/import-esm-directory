@@ -1,6 +1,6 @@
 {
   "name": "import-esm-directory",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "description": "import es-module directory when use ts in node environment",
   "main": "index.js",
   "scripts": {

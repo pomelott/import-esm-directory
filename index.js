@@ -45,31 +45,42 @@ function getFilePrefix(filename) {
     }
     return '';
 }
-function initFilePath(baseDir, esModule) {
+function initFilePath(baseDir, deepModule, layerModule, prefix) {
     var _this = this;
+    /* prefix: the base string of directory  */
     var dir = fs.readdirSync(baseDir);
     var pro = [];
     dir.forEach(function (item) { return __awaiter(_this, void 0, void 0, function () {
-        var targetPath, stat, pro, filenamePrefix;
+        var targetPath, stat, pro, filenamePrefix, layerPrefix;
         return __generator(this, function (_a) {
             targetPath = path.resolve(baseDir, item);
             stat = fs.statSync(targetPath);
             pro = [], filenamePrefix = getFilePrefix(item);
+            layerPrefix = prefix;
             if (stat.isDirectory()) {
-                esModule[item] = {};
-                initFilePath(targetPath, esModule[item]);
+                deepModule[item] = {};
+                if (layerPrefix.length) {
+                    layerPrefix += "" + path.sep + item;
+                }
+                else {
+                    layerPrefix += item;
+                }
+                initFilePath(targetPath, deepModule[item], layerModule, layerPrefix);
             }
             else {
                 // filter the default file
                 if (filenamePrefix !== 'index') {
+                    layerPrefix += "" + path.sep + filenamePrefix;
                     pro.push(new Promise(function (resolve) {
                         // esmodule with import function must return a promise object
                         Promise.resolve().then(function () { return require(targetPath); }).then(function (module) {
                             if (module["default"]) {
-                                esModule[filenamePrefix] = module["default"];
+                                deepModule[filenamePrefix] = module["default"];
+                                layerModule[layerPrefix] = module["default"];
                             }
                             else {
-                                esModule[filenamePrefix] = module;
+                                deepModule[filenamePrefix] = module;
+                                layerModule[layerPrefix] = module;
                             }
                             resolve(true);
                         });
@@ -87,8 +98,8 @@ function makeEsModule(rootDir) {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    esModule = {};
-                    return [4 /*yield*/, initFilePath(rootDir, esModule)];
+                    esModule = { deepModule: {}, layerModule: {} };
+                    return [4 /*yield*/, initFilePath(rootDir, esModule.deepModule, esModule.layerModule, '')];
                 case 1:
                     _a.sent();
                     return [2 /*return*/, esModule];
@@ -107,7 +118,10 @@ exports["default"] = (function (module) { return __awaiter(void 0, void 0, void 
                 if (!(directory && directory[0])) return [3 /*break*/, 2];
                 return [4 /*yield*/, makeEsModule(directory[0])];
             case 1: return [2 /*return*/, _a.sent()];
-            case 2: return [2 /*return*/, {}];
+            case 2: return [2 /*return*/, {
+                    deepModule: {},
+                    layerModule: {}
+                }];
         }
     });
 }); });
