@@ -36,8 +36,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
+exports.importParseDirectory = void 0;
 var path = require('path');
 var fs = require('fs');
+var __ = path.sep;
+var regDir = new RegExp("(" + __ + "(?:[^" + __ + "]+" + __ + "?)+)(?=" + __ + "[^" + __ + "]+)"); // get the root path
 function getFilePrefix(filename) {
     var matchRes = filename.match(/.*(?=\.[^\.]+)/);
     if (matchRes && matchRes.length) {
@@ -60,7 +63,7 @@ function initFilePath(baseDir, deepModule, layerModule, prefix) {
             if (stat.isDirectory()) {
                 deepModule[item] = {};
                 if (layerPrefix.length) {
-                    layerPrefix += "" + path.sep + item;
+                    layerPrefix += "" + __ + item;
                 }
                 else {
                     layerPrefix += item;
@@ -70,11 +73,11 @@ function initFilePath(baseDir, deepModule, layerModule, prefix) {
             else {
                 // filter the default file
                 if (filenamePrefix !== 'index') {
-                    layerPrefix += "" + path.sep + filenamePrefix;
+                    layerPrefix += "" + __ + filenamePrefix;
                     pro.push(new Promise(function (resolve) {
                         // esmodule with import function must return a promise object
                         Promise.resolve().then(function () { return require(targetPath); }).then(function (module) {
-                            if (module["default"]) {
+                            if (module["default"] && Object.keys(module).length === 1) {
                                 deepModule[filenamePrefix] = module["default"];
                                 layerModule[layerPrefix] = module["default"];
                             }
@@ -108,20 +111,36 @@ function makeEsModule(rootDir) {
     });
 }
 exports["default"] = (function (module) { return __awaiter(void 0, void 0, void 0, function () {
-    var __, regDir, directory;
+    var directory, output;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                __ = path.sep;
-                regDir = new RegExp("(" + __ + "(?:[^" + __ + "]+" + __ + "?)+)(?=" + __ + "[^" + __ + "]+)");
                 directory = module.filename.match(regDir);
                 if (!(directory && directory[0])) return [3 /*break*/, 2];
                 return [4 /*yield*/, makeEsModule(directory[0])];
-            case 1: return [2 /*return*/, _a.sent()];
-            case 2: return [2 /*return*/, {
-                    deepModule: {},
-                    layerModule: {}
-                }];
+            case 1:
+                output = _a.sent();
+                return [2 /*return*/, output.deepModule];
+            case 2: return [2 /*return*/, {}];
         }
     });
 }); });
+function importParseDirectory(module) {
+    return __awaiter(this, void 0, void 0, function () {
+        var directory;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    directory = module.filename.match(regDir);
+                    if (!(directory && directory[0])) return [3 /*break*/, 2];
+                    return [4 /*yield*/, makeEsModule(directory[0])];
+                case 1: return [2 /*return*/, _a.sent()];
+                case 2: return [2 /*return*/, {
+                        deepModule: {},
+                        layerModule: {}
+                    }];
+            }
+        });
+    });
+}
+exports.importParseDirectory = importParseDirectory;

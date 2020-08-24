@@ -4,6 +4,10 @@
 * notice: only use with ts in node env !! (ts module can use es-module directly.)
 * if useful, could you please give me a ⭐️star⭐ on github.
 
+## history versions
+
+* [version 1.x](https://github.com/pomelott/import-esm-directory/blob/master/v1.md)
+
 ## fast use
 
 * directory eg:
