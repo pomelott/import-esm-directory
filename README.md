@@ -73,7 +73,7 @@ routerDirectoryPromise.then((esmDirectory) => {
 * router/index.ts
 
 ```ts
-import {importParseDirectory} from 'import-esm-directory
+import {importParseDirectory} from 'import-esm-directory'
 export default importParseDirectory(module);
 ```
 
