@@ -1,6 +1,6 @@
 # import-esm-directory
 
-* [🇨🇳中文文档]()
+* [🇨🇳中文文档](https://github.com/pomelott/import-esm-directory/blob/master/CHINESE.md)
 * import es-module directory when use ts in node environment,ts module can use es-module directly. note that the env need to meet two conditions：
 
 	1. node
