@@ -1,21 +1,20 @@
 # import-esm-directory
 
-* [🇨🇳中文文档]()
-* import es-module directory when use ts in node environment,ts module can use es-module directly. note that the env need to meet two conditions：
+* 在node的ts环境中使用，ts默认支持es module, 注意环境需要满足两个条件：
 
-	1. node
+  1. node
+  
+  2. ts(都什么年代了，还不用ts😁,用过不后悔)
 
-	2. ts (no regrets to use)
+* 如果帮助到您，可否在github上赐我一颗 ⭐️小星星 ⭐
 
-* if useful, could you please give me a ⭐️star⭐ on github.
-
-## history versions
+## 历史版本
 
 * [version 1.x](https://github.com/pomelott/import-esm-directory/blob/master/v1.md)
 
-## fast use
+## 快速使用
 
-* directory eg:
+* 例如有如下目录:
 
 ```bash
 root
@@ -34,7 +33,7 @@ root
          └——— priority.ts
 ```
 
-### use default function
+### 使用默认导出方法
 
 * router/index.ts
 
@@ -73,7 +72,7 @@ routerDirectoryPromise.then((esmDirectory) => {
 */
 ```
 
-### use parse function
+### 使用多类型module解析方法
 
 * router/index.ts
 
@@ -121,7 +120,7 @@ routerDirectoryPromise.then((esmDirectory) => {
 */
 ```
 
-## description
+## 描述
 
-* the separator of path may be different on windows.
-* because that this use dynamic import of es6, so the package returns a promise object
+* 在不用的系统上，分割符会有区别，如 windows 上为 `\\`
+* 因为是基于es6的动态导出，所以本工具返回一个promise对象
