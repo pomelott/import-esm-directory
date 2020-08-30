@@ -122,5 +122,6 @@ routerDirectoryPromise.then((esmDirectory) => {
 
 ## 描述
 
+* 具体例子：[koa-typescript](https://github.com/pomelott/koa-typescript)
 * 在不用的系统上，分割符会有区别，如 windows 上为 `\\`
 * 因为是基于es6的动态导出，所以本工具返回一个promise对象

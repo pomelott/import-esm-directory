@@ -123,5 +123,6 @@ routerDirectoryPromise.then((esmDirectory) => {
 
 ## description
 
+* for specific example: [koa-typescript](https://github.com/pomelott/koa-typescript)
 * the separator of path may be different on windows.
 * because that this use dynamic import of es6, so the package returns a promise object
