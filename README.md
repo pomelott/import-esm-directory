@@ -5,7 +5,7 @@
 
 	1. node
 
-	2. ts (no regrets to use)
+	2. ts
 
 * if useful, could you please give me a ⭐️star⭐ on github.
 
