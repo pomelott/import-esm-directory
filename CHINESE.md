@@ -1,6 +1,8 @@
 # import-esm-directory
 
-* 在node的ts环境中使用，ts默认支持es module, 注意环境需要满足两个条件：
+在支持es模块的环境下，快速引入导出es模块的目录。
+
+* 注意环境需要满足两个条件：
 
   1. node
   
@@ -122,6 +124,6 @@ routerDirectoryPromise.then((esmDirectory) => {
 
 ## 描述
 
-* 具体例子：[koa-typescript](https://github.com/pomelott/koa-typescript)
+* 具体例子：[koa-ts-node](https://github.com/pomelott/koa-ts-node)
 * 在不用的系统上，分割符会有区别，如 windows 上为 `\\`
 * 因为是基于es6的动态导出，所以本工具返回一个promise对象
